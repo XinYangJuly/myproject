@@ -18,10 +18,10 @@ route:
 receivers:
 - name: 'wechat'
   wechat_configs:
-  - corp_id: 'wwf48c22f1e98d3e00'
+  - corp_id: 'wwf48c22f1e98d3e00'   # 企业id，在企业的配置页面可以看到
     to_party: '1'
-    agent_id: '1000003'
-    api_secret: 'FF2ZmCAJ5Ei9BY24_6HxQP1sj6yW3CjIpvOYMBuRPCs'
+    agent_id: '1000003'             # 应用的AgentId，在应用的配置页面可以看到
+    api_secret: 'FF2ZmCAJ5Ei9BY24_6HxQP1sj6yW3CjIpvOYMBuRPCs'   # 应用的secret，在应用的配置页面可以看到
     send_resolved: true
 - name: mail
   email_configs:
