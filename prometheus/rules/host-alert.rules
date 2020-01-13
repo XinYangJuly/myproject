@@ -1,0 +1,10 @@
+groups:
+- name: Alert
+  rules:
+  - alert: hostCpuUsageAlert
+    expr:  node_load15 > 0.8
+    for: 10s
+    labels:
+      severity: page
+    annotations:
+      summary: "cpu 15分钟的平均负载的值超标了"

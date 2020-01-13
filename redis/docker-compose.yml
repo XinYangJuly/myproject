@@ -1,0 +1,28 @@
+version: "3"
+services:
+  redis:
+    image: redis:5.0.4
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/conf.d:/etc/redis/redis.conf
+    command: redis-server /etc/redis/redis.conf
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    ports:
+      - "27017:27017"
+    volumes:
+      - /data/volumes/mongo:/data/db
+  redis-exporter:
+    image: oliver006/redis_exporter
+    container_name: redis-exporter
+    ports:
+      - "9121:9121"
+    command: -redis.addr redis://139.159.185.251:6379

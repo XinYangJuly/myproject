@@ -1,0 +1,29 @@
+global:
+  resolve_timeout: 1m
+  smtp_from: 'xinyangmails@sina.com'
+  smtp_smarthost: 'smtp.sina.com:587'
+  smtp_auth_username: 'xinyangmails@sina.com'
+  smtp_auth_password: '6edf8da09491efb9' # 授权码
+  smtp_require_tls: true
+route:
+  group_by: ['alertname']  # 以标签env分组，拥有labels为env的规则，如果在指定时间同时报警，报警信息会合并为一条进行发送
+  group_wait: 5s  # 组报警等待，等待该组中有没有其他报警
+  group_interval: 5s # 组报警时间间隔
+  repeat_interval: 1m # 重复报警时间，这个生产中根据服务选择合适的时间
+  receiver: 'wechat'
+  routes:
+    - receiver: mail
+      match_re:
+        serverity: mail
+receivers:
+- name: 'wechat'
+  wechat_configs:
+  - corp_id: 'wwf48c22f1e98d3e00'
+    to_party: '1'
+    agent_id: '1000003'
+    api_secret: 'FF2ZmCAJ5Ei9BY24_6HxQP1sj6yW3CjIpvOYMBuRPCs'
+    send_resolved: true
+- name: mail
+  email_configs:
+  - to: 'xinyangmails@sina.com'
+    send_resolved: true

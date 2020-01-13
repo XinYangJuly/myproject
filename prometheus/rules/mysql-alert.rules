@@ -1,0 +1,10 @@
+groups:
+- name: mysqlstatusalert
+  rules:
+  - alert: mysql is down
+    expr: mysql_up == 0
+    for: 5s
+    labels:
+      severity: page
+    annotations:
+      summary: "mysql服务状态异常down"
